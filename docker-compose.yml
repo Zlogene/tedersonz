@@ -16,3 +16,7 @@ services:
         container_name: tuleap
         build:
             context: tuleap
+    kallithea:
+        container_name: kallithea
+        build:
+            context: kallithea
