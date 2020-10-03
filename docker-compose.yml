@@ -20,3 +20,5 @@ services:
         container_name: kallithea
         build:
             context: kallithea
+        ports:
+            - 3080:80

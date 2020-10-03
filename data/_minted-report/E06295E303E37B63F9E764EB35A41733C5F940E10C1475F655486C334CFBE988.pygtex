@@ -1,0 +1,26 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nt}{version}\PYG{p}{:} \PYG{l+s}{\PYGZsq{}3.2\PYGZsq{}}
+\PYG{n+nt}{services}\PYG{p}{:}
+    \PYG{n+nt}{jenkins}\PYG{p}{:}
+        \PYG{n+nt}{container\PYGZus{}name}\PYG{p}{:} \PYG{l+lScalar+lScalarPlain}{jenkins}
+        \PYG{n+nt}{build}\PYG{p}{:}
+            \PYG{n+nt}{context}\PYG{p}{:} \PYG{l+lScalar+lScalarPlain}{jenkins}
+            \PYG{n+nt}{dockerfile}\PYG{p}{:} \PYG{l+lScalar+lScalarPlain}{Dockerfile\PYGZhy{}alpine}
+            \PYG{n+nt}{args}\PYG{p}{:}
+               \PYG{n+nt}{JENKINS\PYGZus{}VERSION}\PYG{p}{:} \PYG{l+lScalar+lScalarPlain}{2.235}
+    \PYG{n+nt}{ports}\PYG{p}{:}
+        \PYG{p+pIndicator}{\PYGZhy{}} \PYG{l+lScalar+lScalarPlain}{8080:8080}
+        \PYG{p+pIndicator}{\PYGZhy{}} \PYG{l+lScalar+lScalarPlain}{50000:50000}
+    \PYG{n+nt}{volumes}\PYG{p}{:}
+        \PYG{p+pIndicator}{\PYGZhy{}} \PYG{l+lScalar+lScalarPlain}{/tmp:/var/jenkins\PYGZus{}home/secrets/}
+    \PYG{n+nt}{tuleap}\PYG{p}{:}
+        \PYG{n+nt}{container\PYGZus{}name}\PYG{p}{:} \PYG{l+lScalar+lScalarPlain}{tuleap}
+        \PYG{n+nt}{build}\PYG{p}{:}
+            \PYG{n+nt}{context}\PYG{p}{:} \PYG{l+lScalar+lScalarPlain}{tuleap}
+    \PYG{+Error}{ }\PYG{n+nt}{kallithea}\PYG{p}{:}
+        \PYG{n+nt}{container\PYGZus{}name}\PYG{p}{:} \PYG{l+lScalar+lScalarPlain}{kallithea}
+        \PYG{n+nt}{build}\PYG{p}{:}
+        \PYG{n+nt}{context}\PYG{p}{:} \PYG{l+lScalar+lScalarPlain}{kallithea}
+    \PYG{n+nt}{ports}\PYG{p}{:}
+        \PYG{p+pIndicator}{\PYGZhy{}} \PYG{l+lScalar+lScalarPlain}{3080:80}
+\end{Verbatim}

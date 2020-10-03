@@ -1,6 +1,6 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020 Gentoo Linux) (preloaded format=pdflatex 2020.9.15)  3 OCT 2020 19:39
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020 Gentoo Linux) (preloaded format=pdflatex 2020.9.15)  3 OCT 2020 22:30
 entering extended mode
- restricted \write18 enabled.
+ \write18 enabled.
  %&-line parsing enabled.
 **report.tex
 (./report.tex
@@ -382,7 +382,7 @@ LaTeX Info: Redefining \addtolength on input line 81.
 )
 (/usr/share/texmf-dist/tex/latex/tools/shellesc.sty
 Package: shellesc 2019/11/08 v1.0c unified shell escape interface for LaTeX
-Package shellesc Info: Restricted shell escape enabled on input line 77.
+Package shellesc Info: Unrestricted shell escape enabled on input line 75.
 )
 (/usr/share/texmf-dist/tex/latex/ifplatform/ifplatform.sty
 Package: ifplatform 2017/10/13 v0.4a Testing for the operating system
@@ -410,11 +410,13 @@ Package: etexcmds 2019/12/15 v1.7 Avoid name clashes with e-TeX commands (HO)
 (/usr/share/texmf-dist/tex/generic/iftex/ifluatex.sty
 Package: ifluatex 2019/10/25 v1.5 ifluatex legacy package. Use iftex instead.
 )
+runsystem(uname -s > "report.w18")...executed.
 
-Package ifplatform Warning: 
-    shell escape is disabled, so I can only detect \ifwindows.
+ (./report.w18)
+runsystem(rm -- "report.w18")...executed.
 
-) (/usr/share/texmf-dist/tex/generic/xstring/xstring.sty
+)
+(/usr/share/texmf-dist/tex/generic/xstring/xstring.sty
 (/usr/share/texmf-dist/tex/generic/xstring/xstring.tex
 \integerpart=\count268
 \decimalpart=\count269
@@ -445,20 +447,8 @@ Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \@float@every@listing=\toks21
 \c@listing=\count273
 )
-runsystem(mkdir -p _minted-report)...disabled (restricted).
+runsystem(mkdir -p _minted-report)...executed.
 
-
-
-! Package minted Error: You must invoke LaTeX with the -shell-escape flag.
-
-See the minted package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.6 \usemintedstyle
-                   {perldoc}
-Pass the -shell-escape flag to LaTeX. Refer to the minted.sty documentation for
- more information.
 
 (/usr/share/texmf-dist/tex/latex/hyperref/hyperref.sty
 Package: hyperref 2020/01/14 v7.00d Hypertext links for LaTeX
@@ -622,21 +612,10 @@ Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1369.
 Package xcolor Info: Model `Gray' substituted by `gray' on input line 1370.
 Package xcolor Info: Model `wave' substituted by `hsb' on input line 1371.
 )
-runsystem(which pygmentize && touch report.aex)...disabled (restricted).
+runsystem(which pygmentize && touch report.aex)...executed.
 
+runsystem(rm report.aex)...executed.
 
-
-! Package minted Error: You must have `pygmentize' installed to use this packag
-e.
-
-See the minted package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.14 \begin{document}
-                     
-Refer to the installation instructions in the minted documentation for more inf
-ormation.
 
 (/usr/share/texmf-dist/tex/latex/l3backend/l3backend-pdfmode.def
 File: l3backend-pdfmode.def 2020-02-23 L3 backend support: PDF mode
@@ -747,7 +726,7 @@ e
 
 (./_minted-report/default-pyg-prefix.pygstyle)
 (./_minted-report/perldoc.pygstyle)
-(./_minted-report/50F4A5DEE2B97D643AA2C05969F0973FC5F940E10C1475F655486C334CFBE
+(./_minted-report/E06295E303E37B63F9E764EB35A41733C5F940E10C1475F655486C334CFBE
 988.pygtex
 LaTeX Font Info:    Trying to load font information for T2A+cmtt on input line 
 1.
@@ -766,147 +745,72 @@ File: ts1cmtt.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
 \openout3 = `report.pyg'.
 
-runsystem(pygmentize -l shell -f latex -P commandprefix=PYG -F tokenmerge -o _m
-inted-report/58B4A66A3AA5A6F727DCCBB7D18717931A39FB77CC30E57C9335824CAE312944.p
-ygtex report.pyg)...disabled (restricted).
 
+(./_minted-report/B06C39B01C8E21DE5B0CE98435F0ABED1A39FB77CC30E57C9335824CAE312
+944.pygtex
+LaTeX Font Info:    External font `cmex7' loaded for size
+(Font)              <5> on input line 6.
+)
+<images/jenkins_setup.png, id=36, 1103.62312pt x 694.09312pt>
+File: images/jenkins_setup.png Graphic file (type png)
+<use images/jenkins_setup.png>
+Package pdftex.def Info: images/jenkins_setup.png  used on input line 101.
+(pdftex.def)             Requested size: 483.69276pt x 304.20514pt.
+<images/kallithea.png, id=37, 1445.4pt x 583.42969pt>
+File: images/kallithea.png Graphic file (type png)
+<use images/kallithea.png>
+Package pdftex.def Info: images/kallithea.png  used on input line 106.
+(pdftex.def)             Requested size: 483.6882pt x 195.23872pt.
+ [2 <./images/jenkins_setup.png (PNG copy)>]
+Overfull \hbox (128.81912pt too wide) in paragraph at lines 110--112
+\T2A/cmr/m/n/10 имен-но внут-рен-ний ад-рес. ¬ дан-ном слу-чае он был вы-€с-нен
+ пу-тЉм за-пус-ка ко-ман-ды [][]\T2A/cmtt/m/n/10 docker inspect ${CONTAINER_ID}
+ | grep IPAddr[]\T2A/cmr/m/n/10 ,
+ []
 
-
-! Package minted Error: Missing Pygments output; \inputminted was
-probably given a file that does not exist--otherwise, you may need 
-the outputdir package option, or may be using an incompatible build tool,
-or may be using frozencache with a missing file.
-
-See the minted package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.97 \end{minted}
-                 
-This could be caused by using -output-directory or -aux-directory 
-without setting minted's outputdir, or by using a build tool that 
-changes paths in ways minted cannot detect, 
-or using frozencache with a missing file.
-
-
-LaTeX Warning: File `jenkins_setup.png' not found on input line 108.
-
-
-! Package pdftex.def Error: File `jenkins_setup.png' not found: using draft set
-ting.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.108 ...eight,keepaspectratio]{jenkins_setup.png}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-[2]
-
-LaTeX Warning: File `gitea_import.png' not found on input line 113.
-
-
-! Package pdftex.def Error: File `gitea_import.png' not found: using draft sett
-ing.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.113 ...height,keepaspectratio]{gitea_import.png}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-[3]
-
-LaTeX Warning: File `jenkins_git.png' not found on input line 118.
-
-
-! Package pdftex.def Error: File `jenkins_git.png' not found: using draft setti
-ng.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.118 ...theight,keepaspectratio]{jenkins_git.png}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-[4]
-
-LaTeX Warning: File `shell.png' not found on input line 127.
-
-
-! Package pdftex.def Error: File `shell.png' not found: using draft setting.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.127 ...t=\textheight,keepaspectratio]{shell.png}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-[5]
-
-LaTeX Warning: File `suc_build.png' not found on input line 132.
-
-
-! Package pdftex.def Error: File `suc_build.png' not found: using draft setting
-.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.132 ...extheight,keepaspectratio]{suc_build.png}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-[6]
-<tulipe.png, id=62, 1129.21875pt x 562.35094pt>
-File: tulipe.png Graphic file (type png)
-<use tulipe.png>
-Package pdftex.def Info: tulipe.png  used on input line 137.
+<images/jenk_build.png, id=46, 1220.30907pt x 613.54219pt>
+File: images/jenk_build.png Graphic file (type png)
+<use images/jenk_build.png>
+Package pdftex.def Info: images/jenk_build.png  used on input line 114.
+(pdftex.def)             Requested size: 483.70195pt x 243.19376pt.
+<images/tulipe.png, id=47, 1129.21875pt x 562.35094pt>
+File: images/tulipe.png Graphic file (type png)
+<use images/tulipe.png>
+Package pdftex.def Info: images/tulipe.png  used on input line 119.
 (pdftex.def)             Requested size: 483.69371pt x 240.87946pt.
- [7]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 143.
- [8 <./tulipe.png (PNG copy)>]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 143.
+[3 <./images/kallithea.png (PNG copy)> <./images/jenk_build.png (PNG copy)>]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 125.
+
+[4 <./images/tulipe.png (PNG copy)>]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 125.
  (./report.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 143.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 143.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 125.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 125.
 Package rerunfilecheck Info: File `report.out' has not changed.
 (rerunfilecheck)             Checksum: B3C35EAEB95D56E4A685B61D43391FE5;958.
-runsystem(rm report.pyg)...disabled (restricted).
+runsystem(rm report.pyg)...executed.
 
  ) 
 Here is how much of TeX's memory you used:
- 14158 strings out of 482409
- 222706 string characters out of 5953138
- 520986 words of memory out of 5000000
- 29185 multiletter control sequences out of 15000+600000
- 537322 words of font info for 32 fonts, out of 8000000 for 9000
+ 14091 strings out of 482409
+ 221933 string characters out of 5953138
+ 520932 words of memory out of 5000000
+ 29130 multiletter control sequences out of 15000+600000
+ 538664 words of font info for 35 fonts, out of 8000000 for 9000
  430 hyphenation exceptions out of 8191
- 41i,6n,37p,1301b,487s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 41i,12n,39p,1301b,641s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}{/usr/share/
 texmf-dist/fonts/enc/dvips/cm-super/cm-super-t2a.enc}</usr/share/texmf-dist/fon
-ts/type1/public/cm-super/sfbx1200.pfb></usr/share/texmf-dist/fonts/type1/public
-/cm-super/sfbx1440.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1
-000.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/s
-hare/texmf-dist/fonts/type1/public/cm-super/sftt1000.pfb>
-Output written on report.pdf (8 pages, 210576 bytes).
+ts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmsy5.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1
+200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/s
+hare/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/texmf-dist
+/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf-dist/fonts/type1/pu
+blic/cm-super/sftt1000.pfb>
+Output written on report.pdf (4 pages, 737058 bytes).
 PDF statistics:
- 103 PDF objects out of 1000 (max. 8388607)
- 86 compressed objects within 1 object stream
- 21 named destinations out of 1000 (max. 500000)
- 38 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 92 PDF objects out of 1000 (max. 8388607)
+ 74 compressed objects within 1 object stream
+ 15 named destinations out of 1000 (max. 500000)
+ 53 words of extra memory for PDF output out of 10000 (max. 10000000)
 

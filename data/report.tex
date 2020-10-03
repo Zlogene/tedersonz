@@ -46,37 +46,34 @@ services:
             dockerfile: Dockerfile-alpine
             args:
                JENKINS_VERSION: 2.235
-        ports:
-           - 8080:8080
-           - 50000:50000
-        volumes:
-           - /tmp:/var/jenkins_home/secrets/
-    gitea:
-        container_name: gitea
+    ports:
+        - 8080:8080
+        - 50000:50000
+    volumes:
+        - /tmp:/var/jenkins_home/secrets/
+    tuleap:
+        container_name: tuleap
         build:
-            context: gitea
-        ports:
-            - 222:22
-            - 3000:3000
-    openproject:
-        container_name: openproject
+            context: tuleap
+     kallithea:
+        container_name: kallithea
         build:
-            context: openproject
-        ports:
-            - 5432:5432
-            - 8090:80
+        context: kallithea
+    ports:
+        - 3080:80
+        
 \end{minted}
 \caption{структура файла docker-compose.yaml}
 \label{fig:dcy}
 \end{figure}
 
-На рис. \ref{fig:dcy} можно видеть структуру файла dpcker compose. На каждый из трёх компонентов приходится свой компонент \texttt{services}. Контекстом каждого компонента по сути является отдельная директория. Для gitea и openproject используются Docker файлы представленные в master ветках репозиториев. Для jenkins в свою очередь используется модифицированный Dockerfile на основе alpine (модификация заключалась в изменении версии на более новую, а также удаление хеша  проверки целостности SHA512, так как присутствующий хэш относился к старой версии jenkins). Необходимость наличия директивы \texttt{volumes} в описании jenkins обусловлена тем, что нам необходимо получить секретный одноразовый ключ необходимый при первом запуске всей	инсталяции.
+На рис. \ref{fig:dcy} можно видеть структуру файла docker compose. На каждый из трёх компонентов приходится свой компонент \texttt{services}. Контекстом каждого компонента по сути является отдельная директория. Для gitea и openproject используются Docker файлы представленные в master ветках репозиториев. Для jenkins в свою очередь используется модифицированный Dockerfile на основе alpine (модификация заключалась в изменении версии на более новую, а также удаление хеша  проверки целостности SHA512, так как присутствующий хэш относился к старой версии jenkins). Необходимость наличия директивы \texttt{volumes} в описании jenkins обусловлена тем, что нам необходимо получить секретный одноразовый ключ необходимый при первом запуске всей	инсталяции.
 Все порты проброшены согласно стандартной документации на каждый продукт, так имеем:
 
 \begin{itemize}
 \item[--] jenkins работает на порту 8080 (web) и 50000 (jenkins agent)
-\item[--] gitea работает на порту 3000 (web) и 222 (для случаев использования протокола SSH при коммитах)
-\item[--] openproject работает на порту 8090 (web) и 5432 (postgresql)
+\item[--] kallithea работает на порту 3080 (web)
+\item[--] tuleap работает на порту 80 (web), но tuleap работает на спицифичном домене tuleap.local
 \end{itemize}
 
 \section{Скрипт резервного копирования}
@@ -85,14 +82,10 @@ services:
 \begin{minted}[breaklines]{shell}
 #!/usr/bin/env bash
 
-backup_func() {
 	echo "Runing backup..."
 	for i in \
 	 $(docker ps --filter "name=kallithea|jenkins|tulipe" | tail -n+2 | awk '{  print $1 }'); do docker export -o ${i}-ci-$(date +"%m-%d-%Y").tar ${i}; \
 	done
-}
-
-backup_func;
 
 \end{minted}
 \caption{Скрипт резервного копирования}
@@ -110,26 +103,15 @@ backup_func;
 \end{figure}
 
 \begin{figure}[H]
-\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{gitea_import.png}
-\caption{Пример gitea с импортированным личным проектом}
+\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{kallithea.png}
+\caption{Пример интерфейса kallithea с коммитом}
 \end{figure}
 
-\begin{figure}[H]
-\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{jenkins_git.png}
-\caption{Пример настройки интеграции gitea и плагина jenkins git}
-\label{fig:git}
-\end{figure}
-
-Для рис. \ref{fig:git} Стоит сделать уточнительное пояснение. Для интеграции необходимо указать полный http-адрес до репозитория. Формально инсталяция kallithea расположена по адресу \texttt{localhost:3000}. Однако данный адрес не является внутренним адресом подсети докера, для того-чтобы подключения прошло успешно необходим именно внутренний адрес. В данном случае он был выяснен путём запуска команды
-\verb#docker inspect ${CONTAINER_ID} | grep IPAddr#, где \verb#${CONTAINER_ID}# --- идентификатор контейнера, в котором запущена инсталяция kallithea. В качестве данных  для авторизации используются данные пользователя gitea.
+Стоит сделать уточнительное пояснение. Для интеграции необходимо указать полный http-адрес до репозитория. Формально инсталяция kallithea расположена по адресу \texttt{localhost:8090}. Однако данный адрес не является внутренним адресом подсети докера, для того-чтобы подключения прошло успешно необходим именно внутренний адрес. В данном случае он был выяснен путём запуска команды
+\verb#docker inspect ${CONTAINER_ID} | grep IPAddr#, где \verb#${CONTAINER_ID}# --- идентификатор контейнера, в котором запущена инсталяция kallithea. В качестве данных  для авторизации используются данные пользователя admin. Тоже самое необходимо сделать для контейнера с инсталяцией tulipe, это необходимо для ассоциации домена tulipe.local с реальным ip адресом контейнера путём редактирования файла /etc/hosts непосредственно на хост-машине. 
 
 \begin{figure}[H]
-\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{shell.png}
-\caption{Пример проверочной команды для выполнения по коммиту в репозиторий}
-\end{figure}
-
-\begin{figure}[H]
-\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{suc_build.png}
+\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{jenk_build.png}
 \caption{Пример успешной сборки проекта с помощью интеграции}
 \end{figure}
 
